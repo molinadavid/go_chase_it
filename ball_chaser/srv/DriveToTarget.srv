@@ -1,0 +1,6 @@
+#request constant
+float64 linear_x
+float64 angular_z
+---
+#response constants
+string msg_feedback
