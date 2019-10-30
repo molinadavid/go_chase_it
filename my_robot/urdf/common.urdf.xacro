@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<robot name="xacro_properties" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+
+  <property name="r200_cam_rgb_px" value="0.005"/>
+  <property name="r200_cam_rgb_py" value="0.018"/>
+  <property name="r200_cam_rgb_pz" value="0.013"/>
+  <property name="r200_cam_depth_offset" value="0.01"/>
+
+</robot>

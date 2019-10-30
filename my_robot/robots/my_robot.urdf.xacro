@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : my_base
+    - 3d Sensor : r200
+    - 2d Sensor : hokuyo
+-->    
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find my_robot)/urdf/library.urdf.xacro" />
+  
+  <my_base/>
+  <sensor_r200    parent="chassis"/>
+  <sensor_hokuyo    parent="chassis"/>
+</robot>

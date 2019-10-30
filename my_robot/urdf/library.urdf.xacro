@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+  The complete library of xacros for easy reference
+ -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- General -->
+  <xacro:include filename="$(find my_robot)/urdf/common.urdf.xacro"/>
+  <!-- Bases -->
+  <xacro:include filename="$(find my_robot)/urdf/base/base.urdf.xacro" />
+  <!-- 3D Sensors -->
+  <xacro:include filename="$(find my_robot)/urdf/sensors/r200.urdf.xacro"/>
+  <!-- 2D Sensors -->
+  <xacro:include filename="$(find my_robot)/urdf/sensors/hokuyo.urdf.xacro"/>
+</robot>

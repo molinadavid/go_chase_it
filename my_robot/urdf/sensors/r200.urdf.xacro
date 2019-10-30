@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<robot name="sensor_r200" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find my_robot)/urdf/common.urdf.xacro" />
+  <xacro:include filename="$(find my_robot)/urdf/sensors/r200_gazebo.urdf.xacro" />
+
+  <xacro:macro name="sensor_r200" params="parent">
+    <!-- camera body -->
+    <joint name="camera_joint" type="fixed">
+      <origin xyz="0.2 0.0 0.0" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="camera" />
+    </joint>
+    <link name="camera">
+      <visual>
+       <origin xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+        <geometry>
+         <mesh filename="package://my_robot/meshes/r200.dae" />
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.130 0.567 0.118"/>
+        </geometry>
+      </collision>
+ 
+      <!-- This inertial field needs doesn't contain reliable data!! -->
+     <inertial>
+        <mass value="0.564" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.003881243" ixy="0.0" ixz="0.0"
+                 iyy="0.000498940" iyz="0.0"
+                 izz="0.003879257" />
+      </inertial>
+    </link>
+    
+    
+    <!--
+    ==  RGB joints & links ==
+    -->
+
+    <joint name="camera_rgb_joint" type="fixed">
+      <origin xyz="${r200_cam_rgb_px} ${r200_cam_rgb_py} ${r200_cam_rgb_pz}" rpy="0 0 0"/>
+      <parent link="camera"/>
+      <child link="camera_rgb_frame" />
+    </joint>
+    <link name="camera_rgb_frame"/>
+
+    <joint name="camera_rgb_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="camera_rgb_frame" />
+      <child link="camera_rgb_optical_frame" />
+    </joint>
+    <link name="camera_rgb_optical_frame"/>
+  
+
+    <!--
+    ==  Depth joints & links ==
+    -->
+
+    <joint name="camera_depth_joint" type="fixed">
+        <origin xyz="0 ${r200_cam_depth_offset} 0" rpy="0 0 0" />
+        <parent link="camera_rgb_frame" />
+        <child link="camera_depth_frame" />
+    </joint>
+    <link name="camera_depth_frame"/>
+
+    <joint name="camera_depth_optical_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+        <parent link="camera_depth_frame" />
+        <child link="camera_depth_optical_frame" />
+    </joint>
+    <link name="camera_depth_optical_frame"/>
+  	
+  	<!-- Simulation sensor -->
+    <r200_sim/>
+  </xacro:macro>
+</robot>
